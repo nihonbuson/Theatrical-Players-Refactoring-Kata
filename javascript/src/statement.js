@@ -41,17 +41,12 @@ function statement (invoice, plays) {
         return resultVolumeCredit;
     }
 
-    function appleSauce() {
-        let totalAmountResult = 0;
-        for (let perf of invoice.performances) {
-            // print line for this order
-            result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${perf.audience} seats)\n`;
-            totalAmountResult += amountFor(perf);
-        }
-        return totalAmountResult;
+    let totalAmount = 0;
+    for (let perf of invoice.performances) {
+        // print line for this order
+        result += ` ${playFor(perf).name}: ${format(amountFor(perf)/100)} (${perf.audience} seats)\n`;
+        totalAmount += amountFor(perf);
     }
-
-    let totalAmount = appleSauce();
 
     function totalVolumeCredits() {
         let volumeCredits = 0;
