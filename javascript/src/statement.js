@@ -41,7 +41,7 @@ function statement (invoice, plays) {
         return result;
     }
 
-    function appleSauce() {
+    function totalAmount() {
         let totalAmount = 0;
         for (let perf of invoice.performances) {
             // print line for this order
@@ -60,7 +60,7 @@ function statement (invoice, plays) {
         return volumeCredits;
     }
 
-    result += `Amount owed is ${format(appleSauce()/100)}\n`;
+    result += `Amount owed is ${format(totalAmount()/100)}\n`;
     result += `You earned ${totalVolumeCredits()} credits\n`;
     return result;
 }
