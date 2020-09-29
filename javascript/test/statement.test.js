@@ -24,3 +24,15 @@ test('Tragedyのタイプで観客数が31人以上と30人以下の場合の検
         'You earned 1 credits\n';
     expect(statement(invoice, plays)).toBe(expected);
 });
+
+test('Comedyのタイプで観客数が31人以上と30人以下の場合の検証', () => {
+    const invoice = JSON.parse(fs.readFileSync('test/comedy_invoice.json', 'utf8'));
+    const plays = JSON.parse(fs.readFileSync('test/comedy_plays.json', 'utf8'));
+    const expected = 'Statement for Comedy Test\n' +
+        ' As You Like It: $357.00 (19 seats)\n' +
+        ' As You Like It 2: $360.00 (20 seats)\n' +
+        ' As You Like It 3: $468.00 (21 seats)\n' +
+        'Amount owed is $1,185.00\n' +
+        'You earned 11 credits\n';
+    expect(statement(invoice, plays)).toBe(expected);
+});

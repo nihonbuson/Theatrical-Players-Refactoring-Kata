@@ -1,0 +1,17 @@
+{
+  "customer": "Comedy Test",
+  "performances": [
+    {
+      "playID": "as-like",
+      "audience": 19
+    },
+    {
+      "playID": "as-like2",
+      "audience": 20
+    },
+    {
+      "playID": "as-like3",
+      "audience": 21
+    }
+  ]
+}
