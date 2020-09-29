@@ -10,6 +10,7 @@ function statement (invoice, plays) {
         const resultEnrichPerformance = Object.assign({}, aPerformance);
         resultEnrichPerformance.play = playFor(resultEnrichPerformance);
         resultEnrichPerformance.amount = amountFor(resultEnrichPerformance);
+        resultEnrichPerformance.volumeCredit = volumeCreditsFor(resultEnrichPerformance);
         return resultEnrichPerformance;
     }
 
@@ -39,6 +40,15 @@ function statement (invoice, plays) {
         return thisAmount;
     }
 
+    function volumeCreditsFor(perf) {
+        let resultVolumeCredit = 0;
+        // add volume credits
+        resultVolumeCredit += Math.max(perf.audience - 30, 0);
+        // add extra credit for every ten comedy attendees
+        if ("comedy" === perf.play.type) resultVolumeCredit += Math.floor(perf.audience / 5);
+        return resultVolumeCredit;
+    }
+
 }
 
 function renderPlainText(data, plays) {
@@ -57,15 +67,6 @@ function renderPlainText(data, plays) {
     result += `You earned ${totalVolumeCredits()} credits\n`;
     return result;
 
-    function volumeCreditsFor(perf) {
-        let resultVolumeCredit = 0;
-        // add volume credits
-        resultVolumeCredit += Math.max(perf.audience - 30, 0);
-        // add extra credit for every ten comedy attendees
-        if ("comedy" === perf.play.type) resultVolumeCredit += Math.floor(perf.audience / 5);
-        return resultVolumeCredit;
-    }
-
     function totalAmount() {
         let resultTotalAmount = 0;
         for (let perf of data.performances) {
@@ -77,7 +78,7 @@ function renderPlainText(data, plays) {
     function totalVolumeCredits() {
         let volumeCredits = 0;
         for (let perf of data.performances) {
-            volumeCredits += volumeCreditsFor(perf);
+            volumeCredits += perf.volumeCredit;
         }
         return volumeCredits;
     }
