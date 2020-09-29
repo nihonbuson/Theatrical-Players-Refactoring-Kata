@@ -10,7 +10,7 @@ function statement (invoice, plays) {
 
     function amountFor(play, perf) {
         let thisAmount = 0;
-        switch (play.type) {
+        switch (playFor(perf).type) {
             case "tragedy":
                 thisAmount = 40000;
                 if (perf.audience > 30) {
@@ -25,7 +25,7 @@ function statement (invoice, plays) {
                 thisAmount += 300 * perf.audience;
                 break;
             default:
-                throw new Error(`unknown type: ${play.type}`);
+                throw new Error(`unknown type: ${playFor(perf).type}`);
         }
         return thisAmount;
     }
