@@ -1,3 +1,4 @@
+'use strict';
 const statement = require('../src/statement');
 const fs=require('fs');
 
