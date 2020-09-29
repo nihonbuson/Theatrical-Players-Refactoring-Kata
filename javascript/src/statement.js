@@ -1,7 +1,6 @@
 'use strict';
 
 function statement (invoice, plays) {
-    let totalAmount = 0;
     let result = `Statement for ${invoice.customer}\n`;
     const format = new Intl.NumberFormat("en-US",
         { style: "currency", currency: "USD",
@@ -42,11 +41,17 @@ function statement (invoice, plays) {
         return result;
     }
 
-    for (let perf of invoice.performances) {
-        // print line for this order
-        result += ` ${playFor(perf).name}: ${format(amountFor(perf)/100)} (${perf.audience} seats)\n`;
-        totalAmount += amountFor(perf);
+    function appleSauce() {
+        let totalAmount = 0;
+        for (let perf of invoice.performances) {
+            // print line for this order
+            result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${perf.audience} seats)\n`;
+            totalAmount += amountFor(perf);
+        }
+        return totalAmount;
     }
+
+    let totalAmount = appleSauce();
 
     function totalVolumeCredits() {
         let volumeCredits = 0;
