@@ -1,0 +1,17 @@
+{
+  "customer": "Tragedy Test",
+  "performances": [
+    {
+      "playID": "hamlet",
+      "audience": 29
+    },
+    {
+      "playID": "hamlet2",
+      "audience": 30
+    },
+    {
+      "playID": "othello",
+      "audience": 31
+    }
+  ]
+}
