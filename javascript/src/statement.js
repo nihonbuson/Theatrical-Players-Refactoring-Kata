@@ -9,30 +9,13 @@ function statement (invoice, plays) {
     function enrichPerformance(aPerformance) {
         const resultEnrichPerformance = Object.assign({}, aPerformance);
         resultEnrichPerformance.play = playFor(resultEnrichPerformance);
+        resultEnrichPerformance.amount = amountFor(resultEnrichPerformance);
         return resultEnrichPerformance;
     }
 
     function playFor(perf) {
         return plays[perf.playID];
     }
-
-}
-
-function renderPlainText(data, plays) {
-    let result = `Statement for ${data.customer}\n`;
-    const format = new Intl.NumberFormat("en-US",
-        {
-            style: "currency", currency: "USD",
-            minimumFractionDigits: 2
-        }).format;
-    for (let perf of data.performances) {
-        // print line for this order
-        result += ` ${perf.play.name}: ${format(amountFor(perf) / 100)} (${perf.audience} seats)\n`;
-    }
-
-    result += `Amount owed is ${format(totalAmount() / 100)}\n`;
-    result += `You earned ${totalVolumeCredits()} credits\n`;
-    return result;
 
     function amountFor(perf) {
         let thisAmount = 0;
@@ -56,6 +39,24 @@ function renderPlainText(data, plays) {
         return thisAmount;
     }
 
+}
+
+function renderPlainText(data, plays) {
+    let result = `Statement for ${data.customer}\n`;
+    const format = new Intl.NumberFormat("en-US",
+        {
+            style: "currency", currency: "USD",
+            minimumFractionDigits: 2
+        }).format;
+    for (let perf of data.performances) {
+        // print line for this order
+        result += ` ${perf.play.name}: ${format(perf.amount / 100)} (${perf.audience} seats)\n`;
+    }
+
+    result += `Amount owed is ${format(totalAmount() / 100)}\n`;
+    result += `You earned ${totalVolumeCredits()} credits\n`;
+    return result;
+
     function volumeCreditsFor(perf) {
         let resultVolumeCredit = 0;
         // add volume credits
@@ -68,7 +69,7 @@ function renderPlainText(data, plays) {
     function totalAmount() {
         let resultTotalAmount = 0;
         for (let perf of data.performances) {
-            resultTotalAmount += amountFor(perf);
+            resultTotalAmount += perf.amount;
         }
         return resultTotalAmount;
     }
