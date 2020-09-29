@@ -27,7 +27,7 @@ function renderPlainText(data, plays) {
         }).format;
     for (let perf of data.performances) {
         // print line for this order
-        result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${perf.audience} seats)\n`;
+        result += ` ${perf.play.name}: ${format(amountFor(perf) / 100)} (${perf.audience} seats)\n`;
     }
 
     result += `Amount owed is ${format(totalAmount() / 100)}\n`;
@@ -36,7 +36,7 @@ function renderPlainText(data, plays) {
 
     function amountFor(perf) {
         let thisAmount = 0;
-        switch (playFor(perf).type) {
+        switch (perf.play.type) {
             case "tragedy":
                 thisAmount = 40000;
                 if (perf.audience > 30) {
@@ -56,16 +56,12 @@ function renderPlainText(data, plays) {
         return thisAmount;
     }
 
-    function playFor(perf) {
-        return plays[perf.playID];
-    }
-
     function volumeCreditsFor(perf) {
         let resultVolumeCredit = 0;
         // add volume credits
         resultVolumeCredit += Math.max(perf.audience - 30, 0);
         // add extra credit for every ten comedy attendees
-        if ("comedy" === playFor(perf).type) resultVolumeCredit += Math.floor(perf.audience / 5);
+        if ("comedy" === perf.play.type) resultVolumeCredit += Math.floor(perf.audience / 5);
         return resultVolumeCredit;
     }
 
