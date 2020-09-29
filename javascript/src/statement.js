@@ -8,7 +8,7 @@ function statement (invoice, plays) {
         { style: "currency", currency: "USD",
             minimumFractionDigits: 2 }).format;
 
-    function amountFor(play, perf) {
+    function amountFor(perf) {
         let thisAmount = 0;
         switch (playFor(perf).type) {
             case "tragedy":
@@ -35,7 +35,7 @@ function statement (invoice, plays) {
     }
 
     for (let perf of invoice.performances) {
-        let thisAmount = amountFor(playFor(perf), perf);
+        let thisAmount = amountFor(perf);
         // add volume credits
         volumeCredits += Math.max(perf.audience - 30, 0);
         // add extra credit for every ten comedy attendees
