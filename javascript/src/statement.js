@@ -7,8 +7,15 @@ function statement (invoice, plays) {
     return renderPlainText(statementData, plays);
 
     function enrichPerformance(aPerformance) {
-        return Object.assign({}, aPerformance)
+        const resultEnrichPerformance = Object.assign({}, aPerformance);
+        resultEnrichPerformance.play = playFor(resultEnrichPerformance);
+        return resultEnrichPerformance;
     }
+
+    function playFor(perf) {
+        return plays[perf.playID];
+    }
+
 }
 
 function renderPlainText(data, plays) {
