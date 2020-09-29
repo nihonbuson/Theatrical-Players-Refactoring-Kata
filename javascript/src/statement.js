@@ -1,12 +1,16 @@
 'use strict';
 
 function statement (invoice, plays) {
-    const statementData = {};
-    statementData.customer = invoice.customer;
-    statementData.performances = invoice.performances.map(enrichPerformance);
-    statementData.totalAmount = totalAmount(statementData);
-    statementData.totalCredit = totalVolumeCredits(statementData);
-    return renderPlainText(statementData);
+    function createStatementData(invoice, plays) {
+        const statementData = {};
+        statementData.customer = invoice.customer;
+        statementData.performances = invoice.performances.map(enrichPerformance);
+        statementData.totalAmount = totalAmount(statementData);
+        statementData.totalCredit = totalVolumeCredits(statementData);
+        return statementData;
+    }
+
+    return renderPlainText(createStatementData(invoice, plays));
 
     function enrichPerformance(aPerformance) {
         const resultEnrichPerformance = Object.assign({}, aPerformance);
