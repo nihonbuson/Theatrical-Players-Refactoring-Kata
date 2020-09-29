@@ -6,7 +6,7 @@ function statement (invoice, plays) {
     statementData.performances = invoice.performances.map(enrichPerformance);
     statementData.totalAmount = totalAmount(statementData);
     statementData.totalCredit = totalVolumeCredits(statementData);
-    return renderPlainText(statementData, plays);
+    return renderPlainText(statementData);
 
     function enrichPerformance(aPerformance) {
         const resultEnrichPerformance = Object.assign({}, aPerformance);
@@ -68,7 +68,7 @@ function statement (invoice, plays) {
     }
 }
 
-function renderPlainText(data, plays) {
+function renderPlainText(data) {
     let result = `Statement for ${data.customer}\n`;
     const format = new Intl.NumberFormat("en-US",
         {
