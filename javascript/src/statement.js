@@ -41,10 +41,15 @@ function statement (invoice, plays) {
         return resultVolumeCredit;
     }
 
-    let totalAmount = 0;
-    for (let perf of invoice.performances) {
-        totalAmount += amountFor(perf);
+    function appleSauce() {
+        let totalAmount = 0;
+        for (let perf of invoice.performances) {
+            totalAmount += amountFor(perf);
+        }
+        return totalAmount;
     }
+
+    let totalAmount = appleSauce();
 
     for (let perf of invoice.performances) {
         // print line for this order
