@@ -51,7 +51,6 @@ function statement (invoice, plays) {
         return totalAmount;
     }
 
-    let totalAmount = appleSauce();
 
     function totalVolumeCredits() {
         let volumeCredits = 0;
@@ -61,7 +60,7 @@ function statement (invoice, plays) {
         return volumeCredits;
     }
 
-    result += `Amount owed is ${format(totalAmount/100)}\n`;
+    result += `Amount owed is ${format(appleSauce()/100)}\n`;
     result += `You earned ${totalVolumeCredits()} credits\n`;
     return result;
 }
