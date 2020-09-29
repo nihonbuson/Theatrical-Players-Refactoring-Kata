@@ -43,9 +43,12 @@ function statement (invoice, plays) {
 
     let totalAmount = 0;
     for (let perf of invoice.performances) {
+        totalAmount += amountFor(perf);
+    }
+
+    for (let perf of invoice.performances) {
         // print line for this order
         result += ` ${playFor(perf).name}: ${format(amountFor(perf)/100)} (${perf.audience} seats)\n`;
-        totalAmount += amountFor(perf);
     }
 
     function totalVolumeCredits() {
