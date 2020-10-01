@@ -26,7 +26,7 @@ test('Tragedyのタイプで観客数が31人以上と30人以下の場合の検
     expect(statement(invoice, plays)).toBe(expected);
 });
 
-test('Comedyのタイプで観客数が31人以上と30人以下の場合の検証', () => {
+test('Comedyのタイプで観客数が21人以上と20人以下の場合の検証', () => {
     const invoice = JSON.parse(fs.readFileSync('test/comedy_invoice.json', 'utf8'));
     const plays = JSON.parse(fs.readFileSync('test/comedy_plays.json', 'utf8'));
     const expected = 'Statement for Comedy Test\n' +
