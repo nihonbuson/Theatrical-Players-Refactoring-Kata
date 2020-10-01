@@ -32,18 +32,17 @@ function statement (invoice, plays) {
                 if (perf.audience > 30) {
                     thisAmount += 1000 * (perf.audience - 30);
                 }
-                break;
+                return thisAmount;
             case "comedy":
                 thisAmount = 30000;
                 if (perf.audience > 20) {
                     thisAmount += 10000 + 500 * (perf.audience - 20);
                 }
                 thisAmount += 300 * perf.audience;
-                break;
+                return thisAmount;
             default:
-                throw new Error(`unknown type: ${playFor(perf).type}`);
+                throw new Error(`unknown type: ${(perf.play.type)}`);
         }
-        return thisAmount;
     }
 
     function volumeCreditsFor(perf) {
