@@ -10,10 +10,8 @@ class PerformanceCalculator {
     }
 
     get volumeCredits() {
-        let resultVolumeCredit = 0;
         // add volume credits
-        resultVolumeCredit += Math.max(this.performance.audience - 30, 0);
-        return resultVolumeCredit;
+        return Math.max(this.performance.audience - 30, 0);
     }
 
 
