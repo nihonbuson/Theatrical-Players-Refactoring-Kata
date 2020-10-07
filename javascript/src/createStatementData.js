@@ -1,5 +1,12 @@
 'use strict';
 
+class PaformanceCalculator {
+    constructor(aPerformance) {
+        this.performance = aPerformance;
+    }
+
+}
+
 function createStatementData(invoice, plays) {
     const statementData = {};
     statementData.customer = invoice.customer;
@@ -7,7 +14,9 @@ function createStatementData(invoice, plays) {
     statementData.totalAmount = totalAmount(statementData);
     statementData.totalCredit = totalVolumeCredits(statementData);
     return statementData;
+
     function enrichPerformance(aPerformance) {
+        const calculator = new PaformanceCalculator(aPerformance);
         const resultEnrichPerformance = Object.assign({}, aPerformance);
         resultEnrichPerformance.play = playFor(resultEnrichPerformance);
         resultEnrichPerformance.amount = amountFor(resultEnrichPerformance);
