@@ -69,11 +69,6 @@ function createPerformanceCalculator(aPerformance, aPlay) {
    }
 }
 
-
-function createPerformanceCalculator(aPerformance, aPlay) {
-    return new PerformanceCalculator(aPerformance, aPlay);
-}
-
 function createStatementData(invoice, plays) {
     const statementData = {};
     statementData.customer = invoice.customer;
