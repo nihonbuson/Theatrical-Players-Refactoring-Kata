@@ -5,22 +5,6 @@ class PerformanceCalculator {
         this.performance = aPerformance;
         this.play = aPlay;
     }
-    get amount() {
-        let thisAmount = 0;
-        switch (this.play.type) {
-            case "tragedy":
-                throw '想定外の呼び出し';
-            case "comedy":
-                thisAmount = 30000;
-                if (this.performance.audience > 20) {
-                    thisAmount += 10000 + 500 * (this.performance.audience - 20);
-                }
-                thisAmount += 300 * this.performance.audience;
-                return thisAmount;
-            default:
-                throw new Error(`unknown type: ${(this.play.type)}`);
-        }
-    }
 
     get volumeCredits() {
         let resultVolumeCredit = 0;
