@@ -5,6 +5,9 @@ class PerformanceCalculator {
         this.performance = aPerformance;
         this.play = aPlay;
     }
+    get amount() {
+        throw new Error('サブクラスの責務');
+    }
 
     get volumeCredits() {
         let resultVolumeCredit = 0;
