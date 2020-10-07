@@ -1,9 +1,31 @@
 'use strict';
 
-class PaformanceCalculator {
-    constructor(aPerformance) {
+class PerformanceCalculator {
+    constructor(aPerformance, aPlay) {
         this.performance = aPerformance;
+        this.play = aPlay;
     }
+    get amount() {
+        let thisAmount = 0;
+        switch (this.play.type) {
+            case "tragedy":
+                thisAmount = 40000;
+                if (this.performance.audience > 30) {
+                    thisAmount += 1000 * (this.performance.audience - 30);
+                }
+                return thisAmount;
+            case "comedy":
+                thisAmount = 30000;
+                if (this.performance.audience > 20) {
+                    thisAmount += 10000 + 500 * (this.performance.audience - 20);
+                }
+                thisAmount += 300 * this.performance.audience;
+                return thisAmount;
+            default:
+                throw new Error(`unknown type: ${(this.play.type)}`);
+        }
+    }
+
 
 }
 
@@ -16,37 +38,16 @@ function createStatementData(invoice, plays) {
     return statementData;
 
     function enrichPerformance(aPerformance) {
-        const calculator = new PaformanceCalculator(aPerformance);
+        const calculator = new PerformanceCalculator(aPerformance, playFor(aPerformance));
         const resultEnrichPerformance = Object.assign({}, aPerformance);
-        resultEnrichPerformance.play = playFor(resultEnrichPerformance);
-        resultEnrichPerformance.amount = amountFor(resultEnrichPerformance);
+        resultEnrichPerformance.play = calculator.play;
+        resultEnrichPerformance.amount = calculator.amount;
         resultEnrichPerformance.volumeCredit = volumeCreditsFor(resultEnrichPerformance);
         return resultEnrichPerformance;
     }
 
     function playFor(perf) {
         return plays[perf.playID];
-    }
-
-    function amountFor(perf) {
-        let thisAmount = 0;
-        switch (perf.play.type) {
-            case "tragedy":
-                thisAmount = 40000;
-                if (perf.audience > 30) {
-                    thisAmount += 1000 * (perf.audience - 30);
-                }
-                return thisAmount;
-            case "comedy":
-                thisAmount = 30000;
-                if (perf.audience > 20) {
-                    thisAmount += 10000 + 500 * (perf.audience - 20);
-                }
-                thisAmount += 300 * perf.audience;
-                return thisAmount;
-            default:
-                throw new Error(`unknown type: ${(perf.play.type)}`);
-        }
     }
 
     function volumeCreditsFor(perf) {
