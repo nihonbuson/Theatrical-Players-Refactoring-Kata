@@ -9,11 +9,7 @@ class PerformanceCalculator {
         let thisAmount = 0;
         switch (this.play.type) {
             case "tragedy":
-                thisAmount = 40000;
-                if (this.performance.audience > 30) {
-                    thisAmount += 1000 * (this.performance.audience - 30);
-                }
-                return thisAmount;
+                throw '想定外の呼び出し';
             case "comedy":
                 thisAmount = 30000;
                 if (this.performance.audience > 20) {
