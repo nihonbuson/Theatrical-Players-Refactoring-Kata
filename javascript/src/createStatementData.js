@@ -40,12 +40,25 @@ class PerformanceCalculator {
 }
 
 class TragedyCalculator extends PerformanceCalculator{
-
+    get amount() {
+        let thisAmount = 40000;
+        if (this.performance.audience > 30) {
+            thisAmount += 1000 * (this.performance.audience - 30);
+        }
+        return thisAmount;
+    }
 
 }
 
 class ComedyCalculator extends PerformanceCalculator{
-
+    get amount() {
+        let thisAmount = 30000;
+        if (this.performance.audience > 20) {
+            thisAmount += 10000 + 500 * (this.performance.audience - 20);
+        }
+        thisAmount += 300 * this.performance.audience;
+        return thisAmount;
+    }
 }
 
 function createPerformanceCalculator(aPerformance, aPlay) {
